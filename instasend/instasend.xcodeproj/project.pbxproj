@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE25322218DA1294006A5104 /* NearbyDevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25322118DA1294006A5104 /* NearbyDevicesViewController.m */; };
+		DE25322518DA1360006A5104 /* NearbyDeviceCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25322418DA1360006A5104 /* NearbyDeviceCollectionViewCell.m */; };
+		DE25322918DA1427006A5104 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25322818DA1427006A5104 /* AppController.m */; };
+		DE25322D18DA1697006A5104 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25322C18DA1697006A5104 /* Device.m */; };
 		DED8EAA0187C84BE00E07C83 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DED8EA9F187C84BE00E07C83 /* Foundation.framework */; };
 		DED8EAA2187C84BE00E07C83 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DED8EAA1187C84BE00E07C83 /* CoreGraphics.framework */; };
 		DED8EAA4187C84BE00E07C83 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DED8EAA3187C84BE00E07C83 /* UIKit.framework */; };
@@ -15,8 +19,6 @@
 		DED8EAB0187C84BE00E07C83 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DED8EAAF187C84BE00E07C83 /* AppDelegate.m */; };
 		DED8EAB3187C84BE00E07C83 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DED8EAB1187C84BE00E07C83 /* Main_iPhone.storyboard */; };
 		DED8EAB6187C84BE00E07C83 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DED8EAB4187C84BE00E07C83 /* Main_iPad.storyboard */; };
-		DED8EAB9187C84BE00E07C83 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DED8EAB8187C84BE00E07C83 /* FirstViewController.m */; };
-		DED8EABC187C84BE00E07C83 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DED8EABB187C84BE00E07C83 /* SecondViewController.m */; };
 		DED8EABE187C84BE00E07C83 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DED8EABD187C84BE00E07C83 /* Images.xcassets */; };
 		DED8EAC5187C84BE00E07C83 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DED8EAC4187C84BE00E07C83 /* XCTest.framework */; };
 		DED8EAC6187C84BE00E07C83 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DED8EA9F187C84BE00E07C83 /* Foundation.framework */; };
@@ -39,6 +41,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DE25322018DA1294006A5104 /* NearbyDevicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyDevicesViewController.h; sourceTree = "<group>"; };
+		DE25322118DA1294006A5104 /* NearbyDevicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyDevicesViewController.m; sourceTree = "<group>"; };
+		DE25322318DA1360006A5104 /* NearbyDeviceCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyDeviceCollectionViewCell.h; sourceTree = "<group>"; };
+		DE25322418DA1360006A5104 /* NearbyDeviceCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyDeviceCollectionViewCell.m; sourceTree = "<group>"; };
+		DE25322718DA1427006A5104 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
+		DE25322818DA1427006A5104 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
+		DE25322B18DA1697006A5104 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
+		DE25322C18DA1697006A5104 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
 		DED8EA9C187C84BE00E07C83 /* instasend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = instasend.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DED8EA9F187C84BE00E07C83 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DED8EAA1187C84BE00E07C83 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -51,10 +61,6 @@
 		DED8EAAF187C84BE00E07C83 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		DED8EAB2187C84BE00E07C83 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		DED8EAB5187C84BE00E07C83 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		DED8EAB7187C84BE00E07C83 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		DED8EAB8187C84BE00E07C83 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		DED8EABA187C84BE00E07C83 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		DED8EABB187C84BE00E07C83 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		DED8EABD187C84BE00E07C83 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DED8EAC3187C84BE00E07C83 /* instasendTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = instasendTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DED8EAC4187C84BE00E07C83 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -90,6 +96,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DE07C5BA18C1105E00393580 /* NearbyDevices */ = {
+			isa = PBXGroup;
+			children = (
+				DE25322018DA1294006A5104 /* NearbyDevicesViewController.h */,
+				DE25322118DA1294006A5104 /* NearbyDevicesViewController.m */,
+				DE25322318DA1360006A5104 /* NearbyDeviceCollectionViewCell.h */,
+				DE25322418DA1360006A5104 /* NearbyDeviceCollectionViewCell.m */,
+			);
+			name = NearbyDevices;
+			sourceTree = "<group>";
+		};
+		DE25322618DA1409006A5104 /* AppController */ = {
+			isa = PBXGroup;
+			children = (
+				DE25322718DA1427006A5104 /* AppController.h */,
+				DE25322818DA1427006A5104 /* AppController.m */,
+			);
+			name = AppController;
+			sourceTree = "<group>";
+		};
+		DE25322A18DA167E006A5104 /* ValueObjects */ = {
+			isa = PBXGroup;
+			children = (
+				DE25322B18DA1697006A5104 /* Device.h */,
+				DE25322C18DA1697006A5104 /* Device.m */,
+			);
+			name = ValueObjects;
+			sourceTree = "<group>";
+		};
 		DED8EA93187C84BD00E07C83 = {
 			isa = PBXGroup;
 			children = (
@@ -123,14 +158,13 @@
 		DED8EAA5187C84BE00E07C83 /* instasend */ = {
 			isa = PBXGroup;
 			children = (
+				DE25322A18DA167E006A5104 /* ValueObjects */,
+				DE25322618DA1409006A5104 /* AppController */,
+				DE07C5BA18C1105E00393580 /* NearbyDevices */,
 				DED8EAAE187C84BE00E07C83 /* AppDelegate.h */,
 				DED8EAAF187C84BE00E07C83 /* AppDelegate.m */,
 				DED8EAB1187C84BE00E07C83 /* Main_iPhone.storyboard */,
 				DED8EAB4187C84BE00E07C83 /* Main_iPad.storyboard */,
-				DED8EAB7187C84BE00E07C83 /* FirstViewController.h */,
-				DED8EAB8187C84BE00E07C83 /* FirstViewController.m */,
-				DED8EABA187C84BE00E07C83 /* SecondViewController.h */,
-				DED8EABB187C84BE00E07C83 /* SecondViewController.m */,
 				DED8EABD187C84BE00E07C83 /* Images.xcassets */,
 				DED8EAA6187C84BE00E07C83 /* Supporting Files */,
 			);
@@ -278,10 +312,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DED8EABC187C84BE00E07C83 /* SecondViewController.m in Sources */,
 				DED8EAB0187C84BE00E07C83 /* AppDelegate.m in Sources */,
-				DED8EAB9187C84BE00E07C83 /* FirstViewController.m in Sources */,
 				DED8EAAC187C84BE00E07C83 /* main.m in Sources */,
+				DE25322518DA1360006A5104 /* NearbyDeviceCollectionViewCell.m in Sources */,
+				DE25322D18DA1697006A5104 /* Device.m in Sources */,
+				DE25322918DA1427006A5104 /* AppController.m in Sources */,
+				DE25322218DA1294006A5104 /* NearbyDevicesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
