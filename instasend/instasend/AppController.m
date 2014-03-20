@@ -37,6 +37,18 @@ static  AppController* sharedInstance = nil;
         Device* newDevice = [[Device alloc] init];
         newDevice.deviceName = @"Test1";
         [_devices addObject:newDevice];
+        [_devices addObject:newDevice];
+        [_devices addObject:newDevice];
+        [_devices addObject:newDevice];
+        [_devices addObject:newDevice];
+        [_devices addObject:newDevice];
+        [_devices addObject:newDevice];
+        [_devices addObject:newDevice];
+        [_devices addObject:newDevice];
+        [_devices addObject:newDevice];
+        [_devices addObject:newDevice];
+        [_devices addObject:newDevice];
+        [_devices addObject:newDevice];
         
         
         

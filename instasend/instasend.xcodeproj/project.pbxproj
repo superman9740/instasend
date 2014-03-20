@@ -11,6 +11,11 @@
 		DE25322518DA1360006A5104 /* NearbyDeviceCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25322418DA1360006A5104 /* NearbyDeviceCollectionViewCell.m */; };
 		DE25322918DA1427006A5104 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25322818DA1427006A5104 /* AppController.m */; };
 		DE25322D18DA1697006A5104 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25322C18DA1697006A5104 /* Device.m */; };
+		DE3F768118DB51C7004BD60F /* iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DE3F768018DB51C7004BD60F /* iphone.png */; };
+		DE3F768318DB67DC004BD60F /* ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DE3F768218DB67DC004BD60F /* ipad.png */; };
+		DE3F768518DB67E6004BD60F /* laptop.png in Resources */ = {isa = PBXBuildFile; fileRef = DE3F768418DB67E6004BD60F /* laptop.png */; };
+		DE3F768718DB6814004BD60F /* monitor.png in Resources */ = {isa = PBXBuildFile; fileRef = DE3F768618DB6814004BD60F /* monitor.png */; };
+		DE3F768918DB6863004BD60F /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = DE3F768818DB6863004BD60F /* gear.png */; };
 		DED8EAA0187C84BE00E07C83 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DED8EA9F187C84BE00E07C83 /* Foundation.framework */; };
 		DED8EAA2187C84BE00E07C83 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DED8EAA1187C84BE00E07C83 /* CoreGraphics.framework */; };
 		DED8EAA4187C84BE00E07C83 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DED8EAA3187C84BE00E07C83 /* UIKit.framework */; };
@@ -49,6 +54,11 @@
 		DE25322818DA1427006A5104 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
 		DE25322B18DA1697006A5104 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
 		DE25322C18DA1697006A5104 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
+		DE3F768018DB51C7004BD60F /* iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphone.png; sourceTree = "<group>"; };
+		DE3F768218DB67DC004BD60F /* ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ipad.png; sourceTree = "<group>"; };
+		DE3F768418DB67E6004BD60F /* laptop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = laptop.png; sourceTree = "<group>"; };
+		DE3F768618DB6814004BD60F /* monitor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monitor.png; sourceTree = "<group>"; };
+		DE3F768818DB6863004BD60F /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
 		DED8EA9C187C84BE00E07C83 /* instasend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = instasend.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DED8EA9F187C84BE00E07C83 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DED8EAA1187C84BE00E07C83 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -205,6 +215,11 @@
 		DED8EADC187C9C3D00E07C83 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				DE3F768818DB6863004BD60F /* gear.png */,
+				DE3F768618DB6814004BD60F /* monitor.png */,
+				DE3F768418DB67E6004BD60F /* laptop.png */,
+				DE3F768218DB67DC004BD60F /* ipad.png */,
+				DE3F768018DB51C7004BD60F /* iphone.png */,
 				DED8EB2C187CB04C00E07C83 /* antenna-icon-120.png */,
 				DED8EADD187C9C4B00E07C83 /* antenna-icon.png */,
 			);
@@ -287,7 +302,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE3F768118DB51C7004BD60F /* iphone.png in Resources */,
+				DE3F768518DB67E6004BD60F /* laptop.png in Resources */,
+				DE3F768918DB6863004BD60F /* gear.png in Resources */,
 				DED8EAB6187C84BE00E07C83 /* Main_iPad.storyboard in Resources */,
+				DE3F768718DB6814004BD60F /* monitor.png in Resources */,
+				DE3F768318DB67DC004BD60F /* ipad.png in Resources */,
 				DED8EABE187C84BE00E07C83 /* Images.xcassets in Resources */,
 				DED8EAB3187C84BE00E07C83 /* Main_iPhone.storyboard in Resources */,
 				DED8EB2D187CB04D00E07C83 /* antenna-icon-120.png in Resources */,

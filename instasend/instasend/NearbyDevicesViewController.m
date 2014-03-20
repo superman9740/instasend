@@ -30,7 +30,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+  //  [self.collectionView registerClass:[NearbyDeviceCollectionViewCell class] forCellWithReuseIdentifier:@"nearbyCell"];
+    
+    
 }
 
 
@@ -50,9 +52,15 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
    
     
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
-    NearbyDeviceCollectionViewCell* cell = [cv dequeueReusableCellWithReuseIdentifier:@"cell " forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor whiteColor];
+    NearbyDeviceCollectionViewCell* cell = [_collectionView dequeueReusableCellWithReuseIdentifier:@"nearbyCell" forIndexPath:indexPath];
+    cell.layer.borderWidth = 3;
+    cell.layer.borderColor = [[UIColor grayColor] CGColor];
+    UIImageView* imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,50,50)];
+    imageView.image = [UIImage imageNamed:@"iphone.png"];
+  //  [cell.contentView addSubview:imageView];
+    
+    
+    
     return cell;
 }
 
