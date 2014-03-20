@@ -478,6 +478,7 @@
 				INFOPLIST_FILE = "instasend/instasend-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5F0B6E99-8990-4ED1-ADF9-B348EAF4796C";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -489,6 +490,7 @@
 				GCC_PREFIX_HEADER = "instasend/instasend-Prefix.pch";
 				INFOPLIST_FILE = "instasend/instasend-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

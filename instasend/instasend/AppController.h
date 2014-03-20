@@ -7,14 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
+@import MultipeerConnectivity;
 
-@interface AppController : NSObject
+@interface AppController : NSObject<MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate>
+
 {
     
     
 }
 
 @property (nonatomic, strong) NSMutableArray*  devices;
+@property (nonatomic, strong) MCPeerID* peerID;
+@property (nonatomic, strong) MCSession* session;
+@property (nonatomic, strong) MCNearbyServiceAdvertiser* serviceAdvertiser;
+
+@property (nonatomic, strong) MCNearbyServiceBrowser* browser;
+@property (nonatomic, strong) MCBrowserViewController* browserViewController;
+
 
 
 

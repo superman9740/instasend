@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B1AFD1AE-9F37-4BF6-B3D9-4FA40CFA377D</string>
+	<key>IDESourceControlProjectName</key>
+	<string>instasend</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>F429A756-C881-410D-8A1C-41AB3C5AE34D</key>
+		<string>ssh://github.com/superman9740/instasend.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>instasend/instasend.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>F429A756-C881-410D-8A1C-41AB3C5AE34D</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/superman9740/instasend.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>F429A756-C881-410D-8A1C-41AB3C5AE34D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F429A756-C881-410D-8A1C-41AB3C5AE34D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Instasend</string>
+		</dict>
+	</array>
+</dict>
+</plist>
