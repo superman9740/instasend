@@ -7,12 +7,17 @@
 //
 
 #import "AppDelegate.h"
+#import "AppController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:124.0/255 green:116.0/255 blue:98.0/255 alpha:1.0]];
+    
+    
+    
     return YES;
 }
 							
@@ -24,8 +29,9 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [[[AppController sharedInstance] serviceAdvertiser] stopAdvertisingPeer];
+    [[[AppController sharedInstance] browser] stopBrowsingForPeers];
+
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -35,12 +41,18 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    [[[AppController sharedInstance] devices] removeAllObjects];
+    [[AppController sharedInstance] initialize];
+    
+
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [[[AppController sharedInstance] serviceAdvertiser] stopAdvertisingPeer];
+    [[[AppController sharedInstance] browser] stopBrowsingForPeers];
+    
 }
 
 @end

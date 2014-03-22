@@ -8,7 +8,8 @@
 
 #import "NearbyDevicesViewController.h"
 #import "AppController.h"
-#import "NearbyDeviceCollectionViewCell.h"
+#import "Device.h"
+
 
 @interface NearbyDevicesViewController ()
 
@@ -30,56 +31,140 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-  //  [self.collectionView registerClass:[NearbyDeviceCollectionViewCell class] forCellWithReuseIdentifier:@"nearbyCell"];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshViews:) name:kRefreshDevicesView object:nil];
+    
+    
+}
+
+-(IBAction)refreshViews:(id)sender
+{
+    [_tableView reloadData];
     
     
 }
 
 
 
-#pragma mark - UICollectionView Datasource
-- (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
-    NSInteger val = [[[AppController sharedInstance] devices] count];
-    
-    return val;
-    
+#pragma mark - UITableView delegate/datasource methods
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;    //count of section
 }
 
-- (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {
-    return 1;
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return [[[AppController sharedInstance] devices] count];    //count number of row from counting array hear cataGorry is An Array
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    
+    static NSString *MyIdentifier = @"nearbyCell";
+    
+    NearbyDevicesTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    
+    if (cell == nil)
+    {
+        cell = [[NearbyDevicesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                       reuseIdentifier:MyIdentifier];
+        
+        
+    }
+    
+   cell.deviceGroup.text = @"iOS";
+   //ScrollView
+    NSMutableArray* devices = [[AppController sharedInstance] devices];
+    int xPos = 0;
+    NSArray* viewObjs = cell.scrollView.subviews;
+    
+    for(UIView* viewObj in  viewObjs )
+    {
+        [viewObj removeFromSuperview ];
+        
+    }
+    
+    for (Device* dev in devices)
+    {
+        
+        
+        CGRect frame;
+        frame.origin.x = xPos;
+        frame.size.height = 80;
+        frame.size.width = 80;
+        
+        UIView* subview = [[UIView alloc] initWithFrame:frame];
+        subview.layer.borderColor = [[UIColor grayColor] CGColor];
+        subview.layer.borderWidth = 1;
+        subview.layer.cornerRadius = 4;
+        //Register tap gesture
+        UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDeviceActionSheet:)];
+        [subview addGestureRecognizer:tapGesture];
+        
+        
+        
+        UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"iphone.png"]];
+        CGRect imageRect = CGRectMake(18,10, 40, 40);
+        imageView.frame = imageRect;
+        
+        [subview addSubview:imageView];
+        
+        
+        UILabel* deviceName = [[UILabel alloc] initWithFrame:CGRectMake(5,60,100,15)];
+        deviceName.textColor = [UIColor blackColor];
+        deviceName.font = [UIFont fontWithName:@"Helvetica" size:12];
+        
+        deviceName.text = dev.deviceName;
+        
+        [subview addSubview:deviceName];
+        
+        //subview.contentMode = UIViewContentModeScaleToFill;
+        
+        //subview.image = image;
+        
+        [cell.scrollView addSubview:subview];
+        xPos += 90;
+        
+    }
+    
+    
+    cell.scrollView.contentSize = CGSizeMake(cell.scrollView.frame.size.width * [devices count], cell.scrollView.frame.size.height);
+    
+ 
    
-    
-    NearbyDeviceCollectionViewCell* cell = [_collectionView dequeueReusableCellWithReuseIdentifier:@"nearbyCell" forIndexPath:indexPath];
-    cell.layer.borderWidth = 3;
-    cell.layer.borderColor = [[UIColor grayColor] CGColor];
-    UIImageView* imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,50,50)];
-    imageView.image = [UIImage imageNamed:@"iphone.png"];
-  //  [cell.contentView addSubview:imageView];
-    
-    
     
     return cell;
 }
 
 
-- (void)didReceiveMemoryWarning
+#pragma  mark action sheet
+-(IBAction)showDeviceActionSheet:(id)sender
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select an action"
+                                                             delegate:self
+                                                    cancelButtonTitle:nil
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:nil];
+    
+    
+    
+    [actionSheet addButtonWithTitle:@"Invite"];
+    
+    actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:@"Cancel"];
+    
+    [actionSheet showInView:self.view];
+    
+    
+    
+    
+    
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+
 
 @end

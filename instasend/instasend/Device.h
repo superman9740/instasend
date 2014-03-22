@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@import MultipeerConnectivity;
 
 @interface Device : NSObject
 {
@@ -15,5 +16,6 @@
 }
 
 @property (nonatomic, strong) NSString* deviceName;
+@property (nonatomic, strong) MCPeerID* peerID;
 
 @end

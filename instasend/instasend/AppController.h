@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 @import MultipeerConnectivity;
 
+#define kRefreshDevicesView @"refreshDevicesView"
+
 @interface AppController : NSObject<MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate>
 
 {
@@ -27,6 +29,7 @@
 
 
 
+-(void)initialize;
 
 + (id)sharedInstance;
 

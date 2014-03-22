@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NearbyDevicesTableViewCell.h"
+
 @import QuartzCore;
 
 @interface NearbyDevicesViewController : UIViewController
@@ -15,6 +17,11 @@
     
 }
 
-@property (nonatomic, strong) IBOutlet UICollectionView* collectionView;
+@property (nonatomic, strong) IBOutlet UITableView* tableView;
+
+-(IBAction)refreshViews:(id)sender;
+
+-(IBAction)showDeviceActionSheet:(id)sender;
+
 
 @end

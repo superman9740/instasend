@@ -10,7 +10,7 @@
 #import "Device.h"
 
 static  AppController* sharedInstance = nil;
-
+ 
 
 @implementation AppController
 
@@ -35,53 +35,43 @@ static  AppController* sharedInstance = nil;
     if(self)
     {
         _devices = [[NSMutableArray alloc] initWithCapacity:10];
-        Device* newDevice = [[Device alloc] init];
-        newDevice.deviceName = @"Test1";
-        [_devices addObject:newDevice];
-        [_devices addObject:newDevice];
-        [_devices addObject:newDevice];
-        [_devices addObject:newDevice];
-        [_devices addObject:newDevice];
-        [_devices addObject:newDevice];
-        [_devices addObject:newDevice];
-        [_devices addObject:newDevice];
-        [_devices addObject:newDevice];
-        [_devices addObject:newDevice];
-        [_devices addObject:newDevice];
-        [_devices addObject:newDevice];
-        [_devices addObject:newDevice];
         
         
         //Multipeer startup - advertise and discover
-        NSString* deviceName = [[UIDevice currentDevice] name];
-        NSString* model = [[UIDevice currentDevice] model];
-        
-        _peerID = [[MCPeerID alloc] initWithDisplayName:deviceName];
-        _session = [[MCSession alloc] initWithPeer:_peerID];
-        _session.delegate = self;
-        NSDictionary* discoveryInfo = [NSDictionary dictionaryWithObjectsAndKeys:deviceName,@"deviceName", model, @"deviceModel", nil];
-        
-        
-        _serviceAdvertiser = [[MCNearbyServiceAdvertiser alloc] initWithPeer:_peerID discoveryInfo:discoveryInfo serviceType:@"instasend"];
-        
-        
-        [_serviceAdvertiser startAdvertisingPeer];
-        _serviceAdvertiser.delegate = self;
-        
-        
-        //Browse to see who is available
-        _browser = [[MCNearbyServiceBrowser alloc] initWithPeer:_peerID serviceType:@"instasend"];
-        _browser.delegate = self;
-        
-        [_browser startBrowsingForPeers];
-        
         
     }
     
     return self;
     
 }
+-(void)initialize
+{
+    
+    NSString* deviceName = [[UIDevice currentDevice] name];
+    NSString* model = [[UIDevice currentDevice] model];
+    
+    _peerID = [[MCPeerID alloc] initWithDisplayName:deviceName];
+    _session = [[MCSession alloc] initWithPeer:_peerID];
+    _session.delegate = self;
+    NSDictionary* discoveryInfo = [NSDictionary dictionaryWithObjectsAndKeys:deviceName,@"deviceName", model, @"deviceModel", nil];
+    
+    
+    _serviceAdvertiser = [[MCNearbyServiceAdvertiser alloc] initWithPeer:_peerID discoveryInfo:discoveryInfo serviceType:@"instasend"];
+    
+    
+    [_serviceAdvertiser startAdvertisingPeer];
+    _serviceAdvertiser.delegate = self;
+    
+    
+    //Browse to see who is available
+    _browser = [[MCNearbyServiceBrowser alloc] initWithPeer:_peerID serviceType:@"instasend"];
+    _browser.delegate = self;
+    
+    [_browser startBrowsingForPeers];
+    
 
+    
+}
 
 - (void)advertiser:(MCNearbyServiceAdvertiser *)advertiser didNotStartAdvertisingPeer:(NSError *)error
 {
@@ -109,9 +99,33 @@ static  AppController* sharedInstance = nil;
 
 - (void)browser:(MCNearbyServiceBrowser *)browser foundPeer:(MCPeerID *)peerID withDiscoveryInfo:(NSDictionary *)info
 {
+    for(int counter = 0;counter < _devices.count;counter++)
+    {
+        Device* tempObj = _devices[counter];
+        
+        if(tempObj.peerID == peerID)
+        {
+            return;
+            
+        }
+        
+    }
+    
+    [NSProcessInfo processInfo] globallyUniqueString
+    
     
     NSString* deviceName = info[@"deviceName"];
-    NSLog(@"A peer was found:  %@", deviceName);
+    NSString* deviceModel = info[@"deviceModel"];
+    
+    NSLog(@"A peer was found:  %@, of model type:  %@", deviceName,deviceModel);
+    Device* newDevice = [[Device alloc] init];
+    newDevice.deviceName = deviceName;
+    newDevice.peerID = peerID;
+    
+    [_devices addObject:newDevice];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRefreshDevicesView object:nil];
+    
     
     //Now invite this peer to this session
    // [_browser invitePeer:peerID toSession:_session withContext:nil timeout:30.0];
@@ -120,7 +134,19 @@ static  AppController* sharedInstance = nil;
 - (void)browser:(MCNearbyServiceBrowser *)browser lostPeer:(MCPeerID *)peerID
 {
     NSLog(@"A peer was lost:  %@", peerID);
-    
+   
+    for(int counter = 0;counter < _devices.count;counter++)
+    {
+        Device* tempObj = _devices[counter];
+        
+        if(tempObj.peerID == peerID)
+        {
+            [_devices removeObject:tempObj];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kRefreshDevicesView object:nil];
+            
+        }
+        
+    }
     
 }
 - (void)session:(MCSession *)session peer:(MCPeerID *)peerID didChangeState:(MCSessionState)state
