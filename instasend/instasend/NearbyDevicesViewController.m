@@ -54,7 +54,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [[[AppController sharedInstance] devices] count];    //count number of row from counting array hear cataGorry is An Array
+    int count = [[[AppController sharedInstance] devices] count];
+    
+    return count;    //count number of row from counting array hear cataGorry is An Array
 }
 
 
@@ -96,12 +98,24 @@
         frame.size.height = 80;
         frame.size.width = 80;
         
-        UIView* subview = [[UIView alloc] initWithFrame:frame];
+        NearbyDevicesDeviceView* subview = [[NearbyDevicesDeviceView alloc] initWithFrame:frame];
         subview.layer.borderColor = [[UIColor grayColor] CGColor];
         subview.layer.borderWidth = 1;
         subview.layer.cornerRadius = 4;
         //Register tap gesture
-        UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDeviceActionSheet:)];
+        subview.device = dev;
+        for(NSString* key in [[[AppController sharedInstance] trustedDevices] allObjects])
+        {
+            if([dev.trustKey isEqualToString:key])
+            {
+                subview.layer.borderColor = [[UIColor greenColor] CGColor];
+                
+                
+            }
+            
+        }
+        
+        UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:subview action:@selector(showDeviceActionSheet:)];
         [subview addGestureRecognizer:tapGesture];
         
         
@@ -140,29 +154,6 @@
 }
 
 
-#pragma  mark action sheet
--(IBAction)showDeviceActionSheet:(id)sender
-{
-    
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select an action"
-                                                             delegate:self
-                                                    cancelButtonTitle:nil
-                                               destructiveButtonTitle:nil
-                                                    otherButtonTitles:nil];
-    
-    
-    
-    [actionSheet addButtonWithTitle:@"Invite"];
-    
-    actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:@"Cancel"];
-    
-    [actionSheet showInView:self.view];
-    
-    
-    
-    
-    
-}
 
 
 

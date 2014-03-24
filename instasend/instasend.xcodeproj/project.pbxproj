@@ -16,6 +16,7 @@
 		DE3F768518DB67E6004BD60F /* laptop.png in Resources */ = {isa = PBXBuildFile; fileRef = DE3F768418DB67E6004BD60F /* laptop.png */; };
 		DE3F768718DB6814004BD60F /* monitor.png in Resources */ = {isa = PBXBuildFile; fileRef = DE3F768618DB6814004BD60F /* monitor.png */; };
 		DE3F768918DB6863004BD60F /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = DE3F768818DB6863004BD60F /* gear.png */; };
+		DE675CBE18E0AE1B00F203F6 /* NearbyDevicesDeviceView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE675CBD18E0AE1B00F203F6 /* NearbyDevicesDeviceView.m */; };
 		DED8EAA0187C84BE00E07C83 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DED8EA9F187C84BE00E07C83 /* Foundation.framework */; };
 		DED8EAA2187C84BE00E07C83 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DED8EAA1187C84BE00E07C83 /* CoreGraphics.framework */; };
 		DED8EAA4187C84BE00E07C83 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DED8EAA3187C84BE00E07C83 /* UIKit.framework */; };
@@ -59,6 +60,8 @@
 		DE3F768418DB67E6004BD60F /* laptop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = laptop.png; sourceTree = "<group>"; };
 		DE3F768618DB6814004BD60F /* monitor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monitor.png; sourceTree = "<group>"; };
 		DE3F768818DB6863004BD60F /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
+		DE675CBC18E0AE1B00F203F6 /* NearbyDevicesDeviceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyDevicesDeviceView.h; sourceTree = "<group>"; };
+		DE675CBD18E0AE1B00F203F6 /* NearbyDevicesDeviceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyDevicesDeviceView.m; sourceTree = "<group>"; };
 		DED8EA9C187C84BE00E07C83 /* instasend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = instasend.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DED8EA9F187C84BE00E07C83 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DED8EAA1187C84BE00E07C83 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -113,6 +116,8 @@
 				DE25322118DA1294006A5104 /* NearbyDevicesViewController.m */,
 				3CE0173318DDE2C800BAAAC8 /* NearbyDevicesTableViewCell.h */,
 				3CE0173418DDE2C800BAAAC8 /* NearbyDevicesTableViewCell.m */,
+				DE675CBC18E0AE1B00F203F6 /* NearbyDevicesDeviceView.h */,
+				DE675CBD18E0AE1B00F203F6 /* NearbyDevicesDeviceView.m */,
 			);
 			name = NearbyDevices;
 			sourceTree = "<group>";
@@ -336,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CE0173518DDE2C800BAAAC8 /* NearbyDevicesTableViewCell.m in Sources */,
+				DE675CBE18E0AE1B00F203F6 /* NearbyDevicesDeviceView.m in Sources */,
 				DED8EAB0187C84BE00E07C83 /* AppDelegate.m in Sources */,
 				DED8EAAC187C84BE00E07C83 /* main.m in Sources */,
 				DE25322D18DA1697006A5104 /* Device.m in Sources */,
@@ -476,11 +482,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "instasend/instasend-Prefix.pch";
 				INFOPLIST_FILE = "instasend/instasend-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "AE18D6AC-DFDB-4977-ACA0-31BE3C4D2989";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -490,10 +497,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "instasend/instasend-Prefix.pch";
 				INFOPLIST_FILE = "instasend/instasend-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

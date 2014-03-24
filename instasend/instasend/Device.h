@@ -17,5 +17,8 @@
 
 @property (nonatomic, strong) NSString* deviceName;
 @property (nonatomic, strong) MCPeerID* peerID;
+@property (nonatomic, strong) NSString* trustKey;
+
+@property (nonatomic, assign) BOOL isTrusted;
 
 @end

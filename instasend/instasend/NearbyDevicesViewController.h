@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "NearbyDevicesTableViewCell.h"
+#import "NearbyDevicesDeviceView.h"
 
 @import QuartzCore;
 
@@ -18,6 +19,8 @@
 }
 
 @property (nonatomic, strong) IBOutlet UITableView* tableView;
+
+
 
 -(IBAction)refreshViews:(id)sender;
 

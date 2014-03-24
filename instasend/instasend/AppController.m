@@ -35,7 +35,29 @@ static  AppController* sharedInstance = nil;
     if(self)
     {
         _devices = [[NSMutableArray alloc] initWithCapacity:10];
+        //_trustedDevices = [[NSMutableDictionary alloc] initWithCapacity:10];
         
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        _trustToken = [defaults objectForKey:@"trustToken"];
+        _trustedDevices = [NSMutableSet setWithArray:[defaults objectForKey:@"trustedDevices"]];
+        _inviteHandlerArray = [[NSMutableArray alloc] initWithCapacity:1];
+        
+        if(_trustToken == nil)
+        {
+            _trustToken =  [[NSProcessInfo processInfo] globallyUniqueString];
+            [defaults setObject:_trustToken forKey:@"trustToken"];
+            [defaults synchronize];
+            
+            
+        }
+   
+        if(_trustedDevices == nil)
+        {
+            _trustedDevices = [[NSMutableSet alloc] initWithCapacity:10];
+            [defaults setObject:_trustedDevices.allObjects forKey:@"trustedDevices"];
+            [defaults synchronize];
+            
+        }
         
         //Multipeer startup - advertise and discover
         
@@ -53,7 +75,7 @@ static  AppController* sharedInstance = nil;
     _peerID = [[MCPeerID alloc] initWithDisplayName:deviceName];
     _session = [[MCSession alloc] initWithPeer:_peerID];
     _session.delegate = self;
-    NSDictionary* discoveryInfo = [NSDictionary dictionaryWithObjectsAndKeys:deviceName,@"deviceName", model, @"deviceModel", nil];
+    NSDictionary* discoveryInfo = [NSDictionary dictionaryWithObjectsAndKeys:deviceName,@"deviceName", model, @"deviceModel",_trustToken, @"trustToken", nil];
     
     
     _serviceAdvertiser = [[MCNearbyServiceAdvertiser alloc] initWithPeer:_peerID discoveryInfo:discoveryInfo serviceType:@"instasend"];
@@ -82,12 +104,61 @@ static  AppController* sharedInstance = nil;
 - (void)advertiser:(MCNearbyServiceAdvertiser *)advertiser didReceiveInvitationFromPeer:(MCPeerID *)peerID withContext:(NSData *)context invitationHandler:(void(^)(BOOL accept, MCSession *session))invitationHandler
 {
     NSLog(@"didReceiveInvitationFromPeer %@", peerID.displayName);
+    NSString* incomingTrustToken = [[NSString alloc] initWithData:context encoding:NSUTF8StringEncoding];
     
-    invitationHandler(YES, _session);
+    _trustTokenWithPendingInvite = incomingTrustToken;
+    [_inviteHandlerArray addObject:invitationHandler];
+    
+    
+    for(int counter = 0;counter < _trustedDevices.count;counter++)
+    {
+        
+        NSString* trustedToken =  [_trustedDevices allObjects][counter];
+    
+        if([trustedToken isEqualToString:incomingTrustToken])
+        {
+            //Set up a session behind the scenes
+            [self acceptInvitation:trustedToken];
+            return;
+        }
+        else
+        {
+            UIAlertView* inviteView = [[UIAlertView alloc] initWithTitle:@"Incoming Invite" message:[NSString stringWithFormat:@"%@ has sent you an invite to become a trusted friend.  Do you accept?", peerID.displayName] delegate:self cancelButtonTitle:@"Accept" otherButtonTitles:@"Decline", nil];
+            
+            [inviteView show];
+            
+            return;
+        }
+        
+    }
+
+    //No trusted tokens exist
+    
+    UIAlertView* inviteView = [[UIAlertView alloc] initWithTitle:@"Incoming Invite" message:[NSString stringWithFormat:@"%@ has sent you an invite to become a trusted friend.  Do you accept?", peerID.displayName] delegate:self cancelButtonTitle:@"Accept" otherButtonTitles:@"Decline", nil];
+    
+    [inviteView show];
+    
     
     
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex)
+    {
+        case 0:
+        {
+            //Accept invitation
+            [self acceptInvitation:_trustTokenWithPendingInvite];
+            break;
+            
+        }
+            
+        default:
+            break;
+    }
+    
+}
 
 - (void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID
 {
@@ -111,18 +182,35 @@ static  AppController* sharedInstance = nil;
         
     }
     
-    [NSProcessInfo processInfo] globallyUniqueString
+ 
     
     
     NSString* deviceName = info[@"deviceName"];
     NSString* deviceModel = info[@"deviceModel"];
+    NSString* deviceTrustKey = info[@"trustToken"];
     
-    NSLog(@"A peer was found:  %@, of model type:  %@", deviceName,deviceModel);
+    NSLog(@"A peer was found:  %@, of model type:  %@, with trustKey:  %@", deviceName,deviceModel,deviceTrustKey);
     Device* newDevice = [[Device alloc] init];
     newDevice.deviceName = deviceName;
     newDevice.peerID = peerID;
+    newDevice.trustKey = deviceTrustKey;
     
     [_devices addObject:newDevice];
+    
+    //Check to see if the is a trusted device
+    for(NSString* trustedToken in _trustedDevices)
+    {
+        if([trustedToken isEqualToString:deviceTrustKey])
+        {
+            //Set up a session behind the scenes
+            _trustTokenWithPendingInvite = deviceTrustKey;
+            
+           // [self sendInvite:peerID trusted:YES];
+            
+            
+        }
+        
+    }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kRefreshDevicesView object:nil];
     
@@ -168,7 +256,7 @@ static  AppController* sharedInstance = nil;
             NSString* str = @"Testing";
             NSData* data = [str dataUsingEncoding:NSUTF8StringEncoding];
             NSArray* peersArray = [NSArray arrayWithObject:peerID];
-            [_session sendData:data toPeers:peersArray withMode:MCSessionSendDataReliable error:&error];
+          //  [_session sendData:data toPeers:peersArray withMode:MCSessionSendDataReliable error:&error];
             
             break;
             
@@ -176,6 +264,8 @@ static  AppController* sharedInstance = nil;
             
         case MCSessionStateConnecting:
         {
+            
+            
             NSLog(@"Peer %@ is connecting.", peerID);
             
             break;
@@ -188,5 +278,50 @@ static  AppController* sharedInstance = nil;
     
 }
 
+-(void)sendInvite:(MCPeerID*)peerID trusted:(BOOL)trusted
+{
+    NSData* context = [_trustToken dataUsingEncoding:NSUTF8StringEncoding];
+    if(!trusted)
+    {
+        [_trustedDevices addObject:_trustTokenWithPendingInvite];
+    
+        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:_trustedDevices.allObjects forKey:@"trustedDevices"];
+        [defaults synchronize];
+    }
+    
+    
+    [_browser invitePeer:peerID toSession:_session withContext:context timeout:30.0];
+    
+    
+}
+-(void)acceptInvitation:(NSString*)trustToken
+{
+    
+    void (^invitationHandler)(BOOL, MCSession *) = [_inviteHandlerArray objectAtIndex:0];
+
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRefreshDevicesView object:nil];
+    
+    for(int counter = 0;counter < _trustedDevices.count;counter++)
+    {
+        NSString* token = [_trustedDevices allObjects][counter];
+        if([trustToken isEqualToString:token])
+        {
+            break;
+        }
+        
+        
+    }
+    [_trustedDevices addObject:trustToken];
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:_trustedDevices.allObjects forKey:@"trustedDevices"];
+    [defaults synchronize];
+
+    
+    invitationHandler(YES, _session);
+    
+    
+}
 
 @end
