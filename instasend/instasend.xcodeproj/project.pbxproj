@@ -17,6 +17,7 @@
 		DE3F768718DB6814004BD60F /* monitor.png in Resources */ = {isa = PBXBuildFile; fileRef = DE3F768618DB6814004BD60F /* monitor.png */; };
 		DE3F768918DB6863004BD60F /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = DE3F768818DB6863004BD60F /* gear.png */; };
 		DE675CBE18E0AE1B00F203F6 /* NearbyDevicesDeviceView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE675CBD18E0AE1B00F203F6 /* NearbyDevicesDeviceView.m */; };
+		DE7936CD18E225EB0003158E /* Payload.m in Sources */ = {isa = PBXBuildFile; fileRef = DE7936CC18E225EB0003158E /* Payload.m */; };
 		DED8EAA0187C84BE00E07C83 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DED8EA9F187C84BE00E07C83 /* Foundation.framework */; };
 		DED8EAA2187C84BE00E07C83 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DED8EAA1187C84BE00E07C83 /* CoreGraphics.framework */; };
 		DED8EAA4187C84BE00E07C83 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DED8EAA3187C84BE00E07C83 /* UIKit.framework */; };
@@ -62,6 +63,8 @@
 		DE3F768818DB6863004BD60F /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
 		DE675CBC18E0AE1B00F203F6 /* NearbyDevicesDeviceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyDevicesDeviceView.h; sourceTree = "<group>"; };
 		DE675CBD18E0AE1B00F203F6 /* NearbyDevicesDeviceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyDevicesDeviceView.m; sourceTree = "<group>"; };
+		DE7936CB18E225EB0003158E /* Payload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Payload.h; sourceTree = "<group>"; };
+		DE7936CC18E225EB0003158E /* Payload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Payload.m; sourceTree = "<group>"; };
 		DED8EA9C187C84BE00E07C83 /* instasend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = instasend.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DED8EA9F187C84BE00E07C83 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DED8EAA1187C84BE00E07C83 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -136,6 +139,8 @@
 			children = (
 				DE25322B18DA1697006A5104 /* Device.h */,
 				DE25322C18DA1697006A5104 /* Device.m */,
+				DE7936CB18E225EB0003158E /* Payload.h */,
+				DE7936CC18E225EB0003158E /* Payload.m */,
 			);
 			name = ValueObjects;
 			sourceTree = "<group>";
@@ -346,6 +351,7 @@
 				DED8EAAC187C84BE00E07C83 /* main.m in Sources */,
 				DE25322D18DA1697006A5104 /* Device.m in Sources */,
 				DE25322918DA1427006A5104 /* AppController.m in Sources */,
+				DE7936CD18E225EB0003158E /* Payload.m in Sources */,
 				DE25322218DA1294006A5104 /* NearbyDevicesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

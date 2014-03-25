@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Device.h"
+#import "NearbyDevicesViewController.h"
 
 @import MultipeerConnectivity;
 
@@ -20,6 +21,8 @@
 }
 
 @property (nonatomic, strong) Device* device;
+@property (nonatomic, strong) id delegate;
+
 
 -(IBAction)showDeviceActionSheet:(id)sender;
 

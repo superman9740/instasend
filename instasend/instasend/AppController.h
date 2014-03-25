@@ -13,7 +13,7 @@
 
 #define kRefreshDevicesView @"refreshDevicesView"
 
-@interface AppController : NSObject<MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate>
+@interface AppController : NSObject<MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate, NSStreamDelegate>
 
 {
     
@@ -35,6 +35,11 @@
 
 @property (nonatomic, strong) NSMutableArray* inviteHandlerArray;
 
+@property (nonatomic, strong) Device* selectedDevice;
+
+@property (nonatomic, strong) NSData* dataToSend;
+@property (nonatomic, strong) NSMutableData* incomingData;
+
 
 
 -(void)initialize;
@@ -45,6 +50,8 @@
 -(void)sendInvite:(MCPeerID*)device trusted:(BOOL)trusted;
 
 -(void)acceptInvitation:(NSString*)trustToken;
+
+-(void)sendPhoto:(UIImage*)photo;
 
 
 @end

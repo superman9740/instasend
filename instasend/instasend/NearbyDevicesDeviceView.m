@@ -28,9 +28,26 @@
                                                destructiveButtonTitle:nil
                                                     otherButtonTitles:nil];
     
+    //If this device is trusted, allow different options
+    for(NSString* key in [[[AppController sharedInstance] trustedDevices] allObjects])
+    {
+        if([_device.trustKey isEqualToString:key])
+        {
+            [actionSheet addButtonWithTitle:@"Send Photo"];
+            [actionSheet addButtonWithTitle:@"Send Video"];
+            [actionSheet addButtonWithTitle:@"Send Contact"];
+            
+            
+        }
+        else
+        {
+            [actionSheet addButtonWithTitle:@"Invite"];
+            
+            
+        }
+        
+    }
     
-    
-    [actionSheet addButtonWithTitle:@"Invite"];
     
     actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:@"Cancel"];
     
@@ -41,28 +58,72 @@
 }
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    
-    switch (buttonIndex)
+    for(NSString* key in [[[AppController sharedInstance] trustedDevices] allObjects])
     {
-        case 0:
+        if([_device.trustKey isEqualToString:key])
         {
-            //invite
-            [[AppController sharedInstance] setTrustTokenWithPendingInvite:_device.trustKey];
-            [[AppController sharedInstance] sendInvite:_device.peerID trusted:NO];
+            switch (buttonIndex)
+            {
+                case 0:
+                {
+                    //send photo
+                    
+                    [[AppController sharedInstance] setSelectedDevice:_device];
+                    [[AppController sharedInstance] sendInvite:_device.peerID trusted:YES];
+                    
+                    [self.delegate selectPhotos:nil];
+                    
+               
+                    
+                    
+                    break;
+                }
+                case 1:
+                {
+                    //send video
+                    break;
+                }
+                case 2:
+                {
+                    //send contact
+                    break;
+                }
+                default:
+                    break;
+            }
             
-             
             
-            
-            break;
         }
-        case 1:
+        else
         {
+            switch (buttonIndex)
+            {
+                case 0:
+                {
+                    //invite
+                    [[AppController sharedInstance] setTrustTokenWithPendingInvite:_device.trustKey];
+                    [[AppController sharedInstance] sendInvite:_device.peerID trusted:NO];
+                    
+                    
+                    
+                    
+                    break;
+                }
+                case 1:
+                {
+                    
+                    break;
+                }
+                default:
+                    break;
+            }
             
-            break;
+            
         }
-        default:
-            break;
+        
     }
+    
+    
     
     
 }

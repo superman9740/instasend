@@ -104,6 +104,8 @@
         subview.layer.cornerRadius = 4;
         //Register tap gesture
         subview.device = dev;
+        subview.delegate = self;
+        
         for(NSString* key in [[[AppController sharedInstance] trustedDevices] allObjects])
         {
             if([dev.trustKey isEqualToString:key])
@@ -153,8 +155,99 @@
     return cell;
 }
 
+-(IBAction)selectPhotos:(id)sender
+{
+    
+    _pickerController = [[UIImagePickerController alloc] init];
+    _pickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    _pickerController.mediaTypes =     [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+    
+    _pickerController.allowsEditing = NO;
+    _pickerController.delegate = self;
+    [self presentViewController:_pickerController animated:YES completion:^{
+    
+        
+     
+     
+     
+     }];
 
+     
+    
+    
+    
+     
+     
+     
+    
+    
+}
 
+- (void) imagePickerController: (UIImagePickerController *) picker didFinishPickingMediaWithInfo: (NSDictionary *) info {
+    
+    NSString *mediaType = [info objectForKey: UIImagePickerControllerMediaType];
+    UIImage *originalImage, *editedImage, *imageToSave;
+    
+    // Handle a still image capture
+    if (CFStringCompare ((CFStringRef) mediaType, kUTTypeImage, 0)
+        == kCFCompareEqualTo) {
+        
+        editedImage = (UIImage *) [info objectForKey:
+                                   UIImagePickerControllerEditedImage];
+        originalImage = (UIImage *) [info objectForKey:
+                                     UIImagePickerControllerOriginalImage];
+        
+        if (editedImage) {
+            imageToSave = editedImage;
+        } else {
+            imageToSave = originalImage;
+        }
+        //Rotate image to view coordinates
+        /*
+         UIGraphicsBeginImageContext(imageToSave.size);
+         
+         CGContextRef bitmap = UIGraphicsGetCurrentContext();
+         
+         // Move the origin to the middle of the image so we will rotate and scale around the center.
+         CGContextTranslateCTM(bitmap, imageToSave.size.width/2, imageToSave.size.height/2);
+         
+         //   // Rotate the image context
+         CGContextRotateCTM(bitmap, radians(90));
+         CGContextScaleCTM(bitmap, 1.0f, -1.0f);
+         // Now, draw the rotated/scaled image into the context
+         CGContextDrawImage(bitmap, CGRectMake(-imageToSave.size.width / 2, -imageToSave.size.height / 2, imageToSave.size.width, imageToSave.size.height), [imageToSave CGImage]);
+         
+         UIImage *rotatedImage = UIGraphicsGetImageFromCurrentImageContext();
+         
+         UIGraphicsEndImageContext();
+         
+         */
+        
+        
+        //   _imageView.image = rotatedImage;
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    [_pickerController dismissViewControllerAnimated:YES completion:^{
+        
+        [[AppController sharedInstance] sendPhoto:originalImage];
+        
+        
+        
+    }];
+    
+    
+    
+    
+    
+}
 
 
 

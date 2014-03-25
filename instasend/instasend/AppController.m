@@ -278,6 +278,68 @@ static  AppController* sharedInstance = nil;
     
 }
 
+- (void)session:(MCSession *)session didReceiveStream:(NSInputStream *)stream withName:(NSString *)streamName fromPeer:(MCPeerID *)peerID
+{
+    
+    stream.delegate = self;
+    
+    
+    [stream scheduleInRunLoop:[NSRunLoop currentRunLoop]
+                       forMode:NSDefaultRunLoopMode];
+   
+    
+}
+- (void)stream:(NSStream *)stream handleEvent:(NSStreamEvent)eventCode
+{
+    switch(eventCode) {
+        case NSStreamEventHasSpaceAvailable:
+        {
+            NSOutputStream* outputStream = (NSOutputStream*)stream;
+            uint32_t length = (uint32_t)htonl([_dataToSend length]);
+            [outputStream write:(uint8_t *)&length maxLength:4];
+            //[outputStream write:[_dataToSend bytes] maxLength:length];
+            break;
+        }
+        case NSStreamEventOpenCompleted:
+        {
+            
+            break;
+        }
+        case NSStreamEventHasBytesAvailable:
+        {
+            NSInputStream* inputStream = (NSInputStream*)stream;
+            if(!_incomingData) {
+                _incomingData = [NSMutableData data];
+            }
+            uint8_t buf[1024];
+            unsigned int len = 0;
+            len = [(NSInputStream *)stream read:buf maxLength:4];
+            if(len)
+            {
+                [_incomingData appendBytes:(const void *)buf length:4];
+                // bytesRead is an instance variable of type NSNumber.
+               // [bytesRead setIntValue:[bytesRead intValue]+len];
+            } else {
+                NSLog(@"no buffer!");
+            }
+
+            
+            
+            break;
+        }
+        case NSStreamEventEndEncountered:
+        {
+            
+            break;
+        }
+        case NSStreamEventErrorOccurred:
+        {
+            
+            break;
+        }
+    }
+    
+}
 -(void)sendInvite:(MCPeerID*)peerID trusted:(BOOL)trusted
 {
     NSData* context = [_trustToken dataUsingEncoding:NSUTF8StringEncoding];
@@ -320,6 +382,38 @@ static  AppController* sharedInstance = nil;
 
     
     invitationHandler(YES, _session);
+    
+    
+}
+- (void)session:(MCSession *)session didStartReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID withProgress:(NSProgress *)progress
+{
+    int x = 5;
+    
+    
+    
+}
+-(void)sendPhoto:(UIImage*)photo
+{
+    MCPeerID* selectedPeer = _selectedDevice.peerID;
+    NSArray* peers = [NSArray arrayWithObject:selectedPeer];
+    NSError* error = nil;
+    
+    
+    NSData *data = UIImagePNGRepresentation(photo);
+    NSString *tmpDirectory = NSTemporaryDirectory();
+    NSString *tmpFile = [tmpDirectory stringByAppendingPathComponent:@"photo.png"];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager createFileAtPath:tmpFile contents:data attributes:nil];
+    NSURL* fileURL = [[NSURL alloc] initFileURLWithPath:tmpFile];
+    
+    
+    [_session sendResourceAtURL:fileURL withName:@"photo.png" toPeer:_selectedDevice.peerID withCompletionHandler:nil];
+    
+    
+    
+    
+    
     
     
 }

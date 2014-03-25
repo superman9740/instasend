@@ -11,8 +11,13 @@
 #import "NearbyDevicesDeviceView.h"
 
 @import QuartzCore;
+@import CoreImage;
+@import CoreMedia;
+@import ImageIO;
+@import QuartzCore;
+@import MobileCoreServices;
 
-@interface NearbyDevicesViewController : UIViewController
+@interface NearbyDevicesViewController : UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     
     
@@ -20,11 +25,16 @@
 
 @property (nonatomic, strong) IBOutlet UITableView* tableView;
 
+@property (nonatomic, strong) Device* device;
+@property(nonatomic, strong) UIImagePickerController* pickerController;
+
+
 
 
 -(IBAction)refreshViews:(id)sender;
 
 -(IBAction)showDeviceActionSheet:(id)sender;
 
+-(IBAction)selectPhotos:(id)sender;
 
 @end
