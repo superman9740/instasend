@@ -29,8 +29,8 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    [[[AppController sharedInstance] serviceAdvertiser] stopAdvertisingPeer];
-    [[[AppController sharedInstance] browser] stopBrowsingForPeers];
+  //  [[[AppController sharedInstance] serviceAdvertiser] stopAdvertisingPeer];
+  //  [[[AppController sharedInstance] browser] stopBrowsingForPeers];
 
 }
 
@@ -50,8 +50,8 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    [[[AppController sharedInstance] serviceAdvertiser] stopAdvertisingPeer];
-    [[[AppController sharedInstance] browser] stopBrowsingForPeers];
+  //  [[[AppController sharedInstance] serviceAdvertiser] stopAdvertisingPeer];
+  //  [[[AppController sharedInstance] browser] stopBrowsingForPeers];
     
 }
 

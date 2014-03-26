@@ -78,11 +78,50 @@
                     </tabBar>
                     <connections>
                         <segue destination="Vi5-1p-ZYv" kind="relationship" relationship="viewControllers" id="SUk-Ux-ee1"/>
+                        <segue destination="QVZ-qg-Dav" kind="relationship" relationship="viewControllers" id="jrP-hm-DmK"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FNP-y4-bzi" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="132" y="180"/>
+        </scene>
+        <!--Activity Table View Controller-->
+        <scene sceneID="WTi-7q-s44">
+            <objects>
+                <tableViewController id="Ar9-ei-i0f" customClass="ActivityTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="54" sectionHeaderHeight="22" sectionFooterHeight="22" id="AyR-7c-W9x">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="activityCell" rowHeight="54" id="Jj1-ce-1AX" customClass="ActivityTableViewCell">
+                                <rect key="frame" x="0.0" y="86" width="320" height="54"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jj1-ce-1AX" id="rwY-eZ-d5w">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="53"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="aZx-jg-Yi0">
+                                            <rect key="frame" x="150" y="36" width="150" height="2"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </progressView>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="progressView" destination="aZx-jg-Yi0" id="mtQ-LH-Zky"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Ar9-ei-i0f" id="7sx-0F-hlE"/>
+                            <outlet property="delegate" destination="Ar9-ei-i0f" id="YQA-1A-yBU"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Kcu-TT-FlP"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ePs-wt-jLZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1141" y="559"/>
         </scene>
         <!--Navigation Controller - Nearby Devices-->
         <scene sceneID="XHx-7f-Zy5">
@@ -102,6 +141,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gCC-DB-mad" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="653" y="-138"/>
+        </scene>
+        <!--Navigation Controller - Activity-->
+        <scene sceneID="CjQ-se-3uH">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QVZ-qg-Dav" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Activity" id="gEY-dA-ov6"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bJf-cF-ggu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Ar9-ei-i0f" kind="relationship" relationship="rootViewController" id="3QQ-DY-BpL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DUi-z6-ooF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="615" y="559"/>
         </scene>
     </scenes>
     <resources>

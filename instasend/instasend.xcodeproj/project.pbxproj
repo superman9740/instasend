@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		3CE0173518DDE2C800BAAAC8 /* NearbyDevicesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0173418DDE2C800BAAAC8 /* NearbyDevicesTableViewCell.m */; };
 		DE25322218DA1294006A5104 /* NearbyDevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25322118DA1294006A5104 /* NearbyDevicesViewController.m */; };
-		DE25322918DA1427006A5104 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25322818DA1427006A5104 /* AppController.m */; };
+		DE25322918DA1427006A5104 /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = DE25322818DA1427006A5104 /* AppController.mm */; };
 		DE25322D18DA1697006A5104 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25322C18DA1697006A5104 /* Device.m */; };
 		DE3F768118DB51C7004BD60F /* iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DE3F768018DB51C7004BD60F /* iphone.png */; };
 		DE3F768318DB67DC004BD60F /* ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DE3F768218DB67DC004BD60F /* ipad.png */; };
@@ -18,6 +18,9 @@
 		DE3F768918DB6863004BD60F /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = DE3F768818DB6863004BD60F /* gear.png */; };
 		DE675CBE18E0AE1B00F203F6 /* NearbyDevicesDeviceView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE675CBD18E0AE1B00F203F6 /* NearbyDevicesDeviceView.m */; };
 		DE7936CD18E225EB0003158E /* Payload.m in Sources */ = {isa = PBXBuildFile; fileRef = DE7936CC18E225EB0003158E /* Payload.m */; };
+		DE87A2CE18E33C6400C1A55A /* ActivityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE87A2CD18E33C6400C1A55A /* ActivityTableViewController.m */; };
+		DE87A2D118E33C8200C1A55A /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE87A2D018E33C8200C1A55A /* ActivityTableViewCell.m */; };
+		DE87A2D418E33DB600C1A55A /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = DE87A2D318E33DB600C1A55A /* Activity.m */; };
 		DED8EAA0187C84BE00E07C83 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DED8EA9F187C84BE00E07C83 /* Foundation.framework */; };
 		DED8EAA2187C84BE00E07C83 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DED8EAA1187C84BE00E07C83 /* CoreGraphics.framework */; };
 		DED8EAA4187C84BE00E07C83 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DED8EAA3187C84BE00E07C83 /* UIKit.framework */; };
@@ -53,7 +56,7 @@
 		DE25322018DA1294006A5104 /* NearbyDevicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyDevicesViewController.h; sourceTree = "<group>"; };
 		DE25322118DA1294006A5104 /* NearbyDevicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyDevicesViewController.m; sourceTree = "<group>"; };
 		DE25322718DA1427006A5104 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
-		DE25322818DA1427006A5104 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
+		DE25322818DA1427006A5104 /* AppController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppController.mm; sourceTree = "<group>"; };
 		DE25322B18DA1697006A5104 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
 		DE25322C18DA1697006A5104 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
 		DE3F768018DB51C7004BD60F /* iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphone.png; sourceTree = "<group>"; };
@@ -65,6 +68,12 @@
 		DE675CBD18E0AE1B00F203F6 /* NearbyDevicesDeviceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyDevicesDeviceView.m; sourceTree = "<group>"; };
 		DE7936CB18E225EB0003158E /* Payload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Payload.h; sourceTree = "<group>"; };
 		DE7936CC18E225EB0003158E /* Payload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Payload.m; sourceTree = "<group>"; };
+		DE87A2CC18E33C6400C1A55A /* ActivityTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTableViewController.h; sourceTree = "<group>"; };
+		DE87A2CD18E33C6400C1A55A /* ActivityTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTableViewController.m; sourceTree = "<group>"; };
+		DE87A2CF18E33C8200C1A55A /* ActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTableViewCell.h; sourceTree = "<group>"; };
+		DE87A2D018E33C8200C1A55A /* ActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTableViewCell.m; sourceTree = "<group>"; };
+		DE87A2D218E33DB600C1A55A /* Activity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Activity.h; sourceTree = "<group>"; };
+		DE87A2D318E33DB600C1A55A /* Activity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Activity.m; sourceTree = "<group>"; };
 		DED8EA9C187C84BE00E07C83 /* instasend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = instasend.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DED8EA9F187C84BE00E07C83 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DED8EAA1187C84BE00E07C83 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -129,7 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				DE25322718DA1427006A5104 /* AppController.h */,
-				DE25322818DA1427006A5104 /* AppController.m */,
+				DE25322818DA1427006A5104 /* AppController.mm */,
 			);
 			name = AppController;
 			sourceTree = "<group>";
@@ -141,8 +150,21 @@
 				DE25322C18DA1697006A5104 /* Device.m */,
 				DE7936CB18E225EB0003158E /* Payload.h */,
 				DE7936CC18E225EB0003158E /* Payload.m */,
+				DE87A2D218E33DB600C1A55A /* Activity.h */,
+				DE87A2D318E33DB600C1A55A /* Activity.m */,
 			);
 			name = ValueObjects;
+			sourceTree = "<group>";
+		};
+		DE87A2CB18E33C4B00C1A55A /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				DE87A2CC18E33C6400C1A55A /* ActivityTableViewController.h */,
+				DE87A2CD18E33C6400C1A55A /* ActivityTableViewController.m */,
+				DE87A2CF18E33C8200C1A55A /* ActivityTableViewCell.h */,
+				DE87A2D018E33C8200C1A55A /* ActivityTableViewCell.m */,
+			);
+			name = Activity;
 			sourceTree = "<group>";
 		};
 		DED8EA93187C84BD00E07C83 = {
@@ -178,6 +200,7 @@
 		DED8EAA5187C84BE00E07C83 /* instasend */ = {
 			isa = PBXGroup;
 			children = (
+				DE87A2CB18E33C4B00C1A55A /* Activity */,
 				DE25322A18DA167E006A5104 /* ValueObjects */,
 				DE25322618DA1409006A5104 /* AppController */,
 				DE07C5BA18C1105E00393580 /* NearbyDevices */,
@@ -349,9 +372,12 @@
 				DE675CBE18E0AE1B00F203F6 /* NearbyDevicesDeviceView.m in Sources */,
 				DED8EAB0187C84BE00E07C83 /* AppDelegate.m in Sources */,
 				DED8EAAC187C84BE00E07C83 /* main.m in Sources */,
+				DE87A2D418E33DB600C1A55A /* Activity.m in Sources */,
+				DE87A2D118E33C8200C1A55A /* ActivityTableViewCell.m in Sources */,
 				DE25322D18DA1697006A5104 /* Device.m in Sources */,
-				DE25322918DA1427006A5104 /* AppController.m in Sources */,
+				DE25322918DA1427006A5104 /* AppController.mm in Sources */,
 				DE7936CD18E225EB0003158E /* Payload.m in Sources */,
+				DE87A2CE18E33C6400C1A55A /* ActivityTableViewController.m in Sources */,
 				DE25322218DA1294006A5104 /* NearbyDevicesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

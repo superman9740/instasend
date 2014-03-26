@@ -69,7 +69,7 @@
                     //send photo
                     
                     [[AppController sharedInstance] setSelectedDevice:_device];
-                    [[AppController sharedInstance] sendInvite:_device.peerID trusted:YES];
+                   // [[AppController sharedInstance] sendInvite:_device.peerID trusted:YES];
                     
                     [self.delegate selectPhotos:nil];
                     
@@ -102,7 +102,7 @@
                 {
                     //invite
                     [[AppController sharedInstance] setTrustTokenWithPendingInvite:_device.trustKey];
-                    [[AppController sharedInstance] sendInvite:_device.peerID trusted:NO];
+                   // [[AppController sharedInstance] sendInvite:_device.peerID trusted:NO];
                     
                     
                     

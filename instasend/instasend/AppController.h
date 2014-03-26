@@ -8,27 +8,42 @@
 
 #import <Foundation/Foundation.h>
 #import "Device.h"
+#import "Activity.h"
 
-@import MultipeerConnectivity;
+
+//#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <errno.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <arpa/inet.h>
+#include <sys/wait.h>
+#include <signal.h>
+
+
+
 
 #define kRefreshDevicesView @"refreshDevicesView"
+#define kRefreshActivityView @"refreshActivityView"
 
-@interface AppController : NSObject<MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate, NSStreamDelegate>
 
+@interface AppController : NSObject
 {
-    
-    
+
+    dispatch_queue_t listenForAccouncementRequestsQueue;
+    dispatch_queue_t listenForAccouncementResponsesQueue;
 }
 
 @property (nonatomic, strong) NSMutableArray*  devices;
+@property (nonatomic, strong) NSMutableArray*  activityEntries;
+
 @property (nonatomic, strong) NSMutableSet*  trustedDevices;
 
-@property (nonatomic, strong) MCPeerID* peerID;
-@property (nonatomic, strong) MCSession* session;
-@property (nonatomic, strong) MCNearbyServiceAdvertiser* serviceAdvertiser;
-
-@property (nonatomic, strong) MCNearbyServiceBrowser* browser;
-@property (nonatomic, strong) MCBrowserViewController* browserViewController;
 @property (nonatomic, strong) NSString* trustToken;
 
 @property (nonatomic, strong) NSString* trustTokenWithPendingInvite;
@@ -42,16 +57,25 @@
 
 
 
+
 -(void)initialize;
 
 + (id)sharedInstance;
 
 
--(void)sendInvite:(MCPeerID*)device trusted:(BOOL)trusted;
+-(void)sendInvite:(Device*)device trusted:(BOOL)trusted;
 
 -(void)acceptInvitation:(NSString*)trustToken;
 
 -(void)sendPhoto:(UIImage*)photo;
 
+#pragma mark socket methods
+-(void)listenForAnnouncementRequests;
+-(void)listenForAnnouncementResponses;
+
+
+
+-(void)sendBroadcastForPeers;
+-(void)sendAnnouncementResponse;
 
 @end
