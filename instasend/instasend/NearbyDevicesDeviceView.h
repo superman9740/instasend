@@ -14,17 +14,17 @@
 
 
 @interface NearbyDevicesDeviceView : UIView<UIActionSheetDelegate>
-
 {
-    
+  
     
 }
 
 @property (nonatomic, strong) Device* device;
 @property (nonatomic, strong) id delegate;
-
+@property (nonatomic, strong)   UIActionSheet* actionSheet;
 
 -(IBAction)showDeviceActionSheet:(id)sender;
+-(void)cancelActionSheet;
 
 
 @end

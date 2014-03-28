@@ -38,6 +38,8 @@ static  AppController* sharedInstance = nil;
         _devices = [[NSMutableArray alloc] initWithCapacity:10];
         _activityEntries = [[NSMutableArray alloc] initWithCapacity:10];
         
+        _ipAddress = [self getIPAddress];
+        
         //_trustedDevices = [[NSMutableDictionary alloc] initWithCapacity:10];
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -47,9 +49,11 @@ static  AppController* sharedInstance = nil;
         
         listenForAccouncementRequestsQueue =  dispatch_queue_create("com.instasend.announcement.requests",NULL);
         listenForAccouncementResponsesQueue =  dispatch_queue_create("com.instasend.announcement.responses",NULL);
+        photoReceiverQueue = dispatch_queue_create("com.instasend.photoreceiver",NULL);
         
         [self listenForAnnouncementRequests];
         [self listenForAnnouncementResponses];
+        [self setUpPhotoReceiver];
         
         if(_trustToken == nil)
         {
@@ -68,8 +72,16 @@ static  AppController* sharedInstance = nil;
             
         }
         
-        [self sendBroacastForPeers];
+        [self sendAnnouncementResponse];
         
+        [self sendBroacastForPeers:self];
+    
+        timer = [NSTimer scheduledTimerWithTimeInterval:10.0
+                                                  target:self
+                                                selector:@selector(sendBroacastForPeers:)
+                                                userInfo:nil
+                                                 repeats:YES];
+      
         
     }
     
@@ -206,47 +218,96 @@ static  AppController* sharedInstance = nil;
                 NSString* deviceName = components[0];
                 NSString* deviceModel = components[1];
                 NSString* deviceTrustKey = components[2];
-               
-                NSLog(@"A peer was found:  %@, of model type:  %@, with trustKey:  %@", deviceName,deviceModel,deviceTrustKey);
-               
+                NSString* ipAddr = components[3];
+                NSArray* ipStringParts = [ipAddr componentsSeparatedByString:@"."];
+                NSArray* currentIPStringParts = [_ipAddress componentsSeparatedByString:@"."];
                 
-                Device* newDevice = [[Device alloc] init];
-                newDevice.deviceName = deviceName;
-                newDevice.trustKey = deviceTrustKey;
+                int val1 = [ipStringParts[0] intValue];
+                int val2= [ipStringParts[1] intValue];
+                int val3 = [ipStringParts[2] intValue];
+                int val4 = [ipStringParts[3] intValue];
                 
-                [_devices addObject:newDevice];
                 
-                //Check to see if the is a trusted device
-                for(NSString* trustedToken in _trustedDevices)
+                int val5 = [currentIPStringParts[0] intValue];
+                int val6= [currentIPStringParts[1] intValue];
+                int val7 = [currentIPStringParts[2] intValue];
+                int val8 = [currentIPStringParts[3] intValue];
+                
+                if(val1 == val5 && val2 == val6 && val3 == val7 && val4 == val8)
                 {
-                    if([trustedToken isEqualToString:deviceTrustKey])
+                    continue;
+                }
+                else
+                {
+                    NSLog(@"A peer was found:  %@, of model type:  %@, with trustKey:  %@, and IP address:  %@", deviceName,deviceModel,deviceTrustKey, ipAddr);
+                    
+                    
+                    Device* newDevice = [[Device alloc] init];
+                    newDevice.deviceName = deviceName;
+                    newDevice.trustKey = deviceTrustKey;
+                    newDevice.ipAddress = ipAddr;
+                    
+                    if(_devices.count == 0)
                     {
-                        //Set up a session behind the scenes
-                        _trustTokenWithPendingInvite = deviceTrustKey;
-                        
-                        // [self sendInvite:peerID trusted:YES];
-                        
+                        [_devices addObject:newDevice];
                         
                     }
+                    for(Device* dev in _devices)
+                    {
+                        if([dev.trustKey isEqualToString:deviceTrustKey])
+                        {
+                            
+                            
+                            
+                        }
+                        else
+                        {
+                            [_devices addObject:newDevice];
+                            
+                            //Check to see if the is a trusted device
+                            for(NSString* trustedToken in _trustedDevices)
+                            {
+                                if([trustedToken isEqualToString:deviceTrustKey])
+                                {
+                                    //Set up a session behind the scenes
+                                    _trustTokenWithPendingInvite = deviceTrustKey;
+                                    
+                                    // [self sendInvite:peerID trusted:YES];
+                                    
+                                    
+                                }
+                                
+                            }
+                            
+                           
+                            
+                        }
+                    }
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        if(!_actionSheetIsBeingShown)
+                        {
+                            [[NSNotificationCenter defaultCenter] postNotificationName:kRefreshDevicesView object:nil];
+                        }
+                        
+                        
+                    });
+                    
+                    
+                    
                     
                 }
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kRefreshDevicesView object:nil];
-                    
-                });
-                
-                
-
-                
+            
             }
         }
         
+      
         
-        
-    });
+        });
+    
+    
+   
+    
     
     
     
@@ -281,14 +342,15 @@ static  AppController* sharedInstance = nil;
     // Send the broadcast request, ie "Any upnp devices out there?"
     NSString* deviceName = [[UIDevice currentDevice] name];
     NSString* model = [[UIDevice currentDevice] model];
-    NSString* responseStr = [NSString stringWithFormat:@"%@|%@|%@",deviceName,model,_trustToken];
+    NSString* responseStr = [NSString stringWithFormat:@"%@|%@|%@|%@",deviceName,model,_trustToken,_ipAddress];
     
     const char *response = [responseStr UTF8String];
     int totalBytesToSend = strlen(response);
     
     ret = sendto(sd, response, strlen(response), 0, (struct sockaddr*)&broadcastAddr, sizeof broadcastAddr);
-    printf("Socket Sendto error %d : %s\n", errno, strerror(errno));
+    
     if (ret<0) {
+        printf("Socket Sendto error %d : %s\n", errno, strerror(errno));
         close(sd);
         
     }
@@ -298,8 +360,13 @@ static  AppController* sharedInstance = nil;
 
     
 }
--(void)sendBroacastForPeers
+-(IBAction)sendBroacastForPeers:(id)sender
 {
+    if(_actionSheetIsBeingShown)
+        return;
+    
+    
+
     
     // Open a socket
     int sd = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP);
@@ -332,7 +399,112 @@ static  AppController* sharedInstance = nil;
         close(sd);
         return ;
     }
+    [_devices removeAllObjects];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRefreshDevicesView object:nil];
 
+    
+}
+
+
+#pragma mark receive photo
+
+-(void)setUpPhotoReceiver
+{
+    
+    
+    dispatch_async(photoReceiverQueue,^{
+    
+        
+    struct sockaddr_in stSockAddr;
+    int SocketFD = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
+    
+    if(-1 == SocketFD)
+    {
+        perror("can not create socket");
+        exit(EXIT_FAILURE);
+    }
+    
+    memset(&stSockAddr, 0, sizeof(stSockAddr));
+    
+    stSockAddr.sin_family = AF_INET;
+    stSockAddr.sin_port = htons(1903);
+    stSockAddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    
+    if(-1 == bind(SocketFD,(struct sockaddr *)&stSockAddr, sizeof(stSockAddr)))
+    {
+        perror("error bind failed");
+        close(SocketFD);
+        exit(EXIT_FAILURE);
+    }
+    
+    if(-1 == listen(SocketFD, 10))
+    {
+        perror("error listen failed");
+        close(SocketFD);
+        exit(EXIT_FAILURE);
+    }
+    
+    for(;;)
+    {
+        int ConnectFD = accept(SocketFD, NULL, NULL);
+        
+        if(0 > ConnectFD)
+        {
+            perror("error accept failed");
+            close(SocketFD);
+            exit(EXIT_FAILURE);
+        }
+        
+        /* perform read write operations ...
+         read(ConnectFD,buff,size)*/
+        
+        if (-1 == shutdown(ConnectFD, SHUT_RDWR))
+        {
+            perror("can not shutdown socket");
+            close(ConnectFD);
+            close(SocketFD);
+           
+        }
+        close(ConnectFD);
+    }
+    
+    close(SocketFD);
+    
+        
+    });
+    
+                   
+}
+
+- (NSString *)getIPAddress {
+    
+    NSString *address = @"error";
+    struct ifaddrs *interfaces = NULL;
+    struct ifaddrs *temp_addr = NULL;
+    int success = 0;
+    // retrieve the current interfaces - returns 0 on success
+    success = getifaddrs(&interfaces);
+    if (success == 0) {
+        // Loop through linked list of interfaces
+        temp_addr = interfaces;
+        while(temp_addr != NULL) {
+            if(temp_addr->ifa_addr->sa_family == AF_INET) {
+                // Check if interface is en0 which is the wifi connection on the iPhone
+                if([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"]) {
+                    // Get NSString from C String
+                    address = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)];
+                    
+                }
+                
+            }
+            
+            temp_addr = temp_addr->ifa_next;
+        }
+    }
+    // Free memory
+    freeifaddrs(interfaces);
+    return address;
+    
 }
 
 /*
@@ -584,27 +756,97 @@ static  AppController* sharedInstance = nil;
     
     
 }
--(void)sendPhoto:(UIImage*)photo
+*/
+ -(void)sendPhoto:(UIImage*)photo
 {
-    MCPeerID* selectedPeer = _selectedDevice.peerID;
-    NSArray* peers = [NSArray arrayWithObject:selectedPeer];
-    NSError* error = nil;
+    Device* selectedDevice = _selectedDevice;
     
     
     NSData *data = UIImagePNGRepresentation(photo);
+    /*
     NSString *tmpDirectory = NSTemporaryDirectory();
     NSString *tmpFile = [tmpDirectory stringByAppendingPathComponent:@"photo.png"];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     [fileManager createFileAtPath:tmpFile contents:data attributes:nil];
     NSURL* fileURL = [[NSURL alloc] initFileURLWithPath:tmpFile];
+    */
     
     //Add an activity entry
     Activity* activity = [[Activity alloc] init];
     activity.activityType = @"Sending";
-    activity.deviceName = selectedPeer.displayName;
+    activity.deviceName = selectedDevice.deviceName;
     [_activityEntries addObject:activity];
     [[NSNotificationCenter defaultCenter] postNotificationName:kRefreshActivityView object:self userInfo:nil];
+    
+    
+    
+    struct sockaddr_in stSockAddr;
+    int Res;
+    int SocketFD = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
+    
+    if (-1 == SocketFD)
+    {
+        perror("cannot create socket");
+        exit(EXIT_FAILURE);
+    }
+    
+    memset(&stSockAddr, 0, sizeof(stSockAddr));
+    
+    stSockAddr.sin_family = AF_INET;
+    stSockAddr.sin_port = htons(1903);
+    Res = inet_pton(AF_INET, selectedDevice.ipAddress.UTF8String, &stSockAddr.sin_addr);
+    
+    if (0 > Res)
+    {
+        perror("error: first parameter is not a valid address family");
+        close(SocketFD);
+        exit(EXIT_FAILURE);
+    }
+    else if (0 == Res)
+    {
+        perror("char string (second parameter does not contain valid ipaddress)");
+        close(SocketFD);
+        exit(EXIT_FAILURE);
+    }
+    
+    if (-1 == connect(SocketFD, (struct sockaddr *)&stSockAddr, sizeof(stSockAddr)))
+    {
+        perror("connect failed");
+        close(SocketFD);
+        exit(EXIT_FAILURE);
+    }
+    
+    long totalBytesToSend = [data length];
+    long bytesWritten = 0;
+    long totalBytesWritten = 0;
+    uint8_t buffer[1025];
+    uint8_t *readBytes = (uint8_t *)[data bytes];
+    
+    while(totalBytesWritten < totalBytesToSend)
+    {
+        bzero(buffer, 1024);
+        
+        memcpy(buffer,readBytes,1024);
+        try {
+       
+            bytesWritten = send(SocketFD, buffer, 1024, 0);
+            
+        } catch (NSException* e)
+        {
+            int x = 5;
+            
+        }
+        
+        totalBytesWritten += bytesWritten;
+        
+        
+    }
+    /* perform read write operations ... */
+    
+    (void) shutdown(SocketFD, SHUT_RDWR);
+    
+    close(SocketFD);
     
     //[_session sendResourceAtURL:fileURL withName:@"photo.png" toPeer:_selectedDevice.peerID withCompletionHandler:nil];
     
@@ -615,6 +857,6 @@ static  AppController* sharedInstance = nil;
     
     
 }
-*/
+
 
 @end

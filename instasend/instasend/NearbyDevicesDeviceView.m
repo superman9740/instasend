@@ -20,9 +20,10 @@
     return self;
 }
 
+
 -(IBAction)showDeviceActionSheet:(id)sender
 {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select an action"
+    _actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select an action"
                                                              delegate:self
                                                     cancelButtonTitle:nil
                                                destructiveButtonTitle:nil
@@ -33,15 +34,15 @@
     {
         if([_device.trustKey isEqualToString:key])
         {
-            [actionSheet addButtonWithTitle:@"Send Photo"];
-            [actionSheet addButtonWithTitle:@"Send Video"];
-            [actionSheet addButtonWithTitle:@"Send Contact"];
+            [_actionSheet addButtonWithTitle:@"Send Photo"];
+            [_actionSheet addButtonWithTitle:@"Send Video"];
+            [_actionSheet addButtonWithTitle:@"Send Contact"];
             
             
         }
         else
         {
-            [actionSheet addButtonWithTitle:@"Invite"];
+            [_actionSheet addButtonWithTitle:@"Invite"];
             
             
         }
@@ -49,15 +50,18 @@
     }
     
     
-    actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:@"Cancel"];
+    _actionSheet.cancelButtonIndex = [_actionSheet addButtonWithTitle:@"Cancel"];
     
-    [actionSheet showInView:self];
+    [_actionSheet showInView:self];
     
-
+    [[AppController sharedInstance] setActionSheetIsBeingShown:YES];
+    
     
 }
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    [[AppController sharedInstance] setActionSheetIsBeingShown:NO];
+    
     for(NSString* key in [[[AppController sharedInstance] trustedDevices] allObjects])
     {
         if([_device.trustKey isEqualToString:key])
@@ -128,7 +132,14 @@
     
 }
 
-
+-(void)cancelActionSheet
+{
+    if(_actionSheet)
+    {
+        [_actionSheet dismissWithClickedButtonIndex:2 animated:YES];
+    }
+    
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.

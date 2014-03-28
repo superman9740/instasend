@@ -85,6 +85,12 @@
     
     for(UIView* viewObj in  viewObjs )
     {
+        if([viewObj isKindOfClass:[NearbyDevicesDeviceView class]])
+        {
+            NearbyDevicesDeviceView* tempView = (NearbyDevicesDeviceView*)viewObj;
+            [tempView cancelActionSheet];
+            
+        }
         [viewObj removeFromSuperview ];
         
     }

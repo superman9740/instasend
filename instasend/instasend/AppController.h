@@ -24,6 +24,9 @@
 #include <arpa/inet.h>
 #include <sys/wait.h>
 #include <signal.h>
+#include <ifaddrs.h>
+#include <arpa/inet.h>
+
 
 
 
@@ -37,6 +40,11 @@
 
     dispatch_queue_t listenForAccouncementRequestsQueue;
     dispatch_queue_t listenForAccouncementResponsesQueue;
+    dispatch_queue_t photoReceiverQueue;
+    
+    
+    NSTimer* timer;
+    
 }
 
 @property (nonatomic, strong) NSMutableArray*  devices;
@@ -56,7 +64,10 @@
 @property (nonatomic, strong) NSMutableData* incomingData;
 
 
+@property (nonatomic, strong) NSString* ipAddress;
 
+
+@property (nonatomic, assign) BOOL actionSheetIsBeingShown;
 
 -(void)initialize;
 
@@ -73,9 +84,12 @@
 -(void)listenForAnnouncementRequests;
 -(void)listenForAnnouncementResponses;
 
+-(void)setUpPhotoReceiver;
 
+-(IBAction)sendBroadcastForPeers:(id)sender;
 
--(void)sendBroadcastForPeers;
 -(void)sendAnnouncementResponse;
+- (NSString *)getIPAddress;
+
 
 @end
