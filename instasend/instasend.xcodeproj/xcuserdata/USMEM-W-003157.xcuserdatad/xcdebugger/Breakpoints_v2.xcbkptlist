@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "instasend/AppController.mm"
-            timestampString = "417734412.821308"
+            timestampString = "418255362.622413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "690"
-            endingLineNumber = "690"
+            startingLineNumber = "702"
+            endingLineNumber = "702"
             landmarkName = "@implementation AppController"
             landmarkType = "3">
          </BreakpointContent>
@@ -84,11 +84,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "instasend/AppController.mm"
-            timestampString = "417735348.78714"
+            timestampString = "418255362.622413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "820"
-            endingLineNumber = "820"
+            startingLineNumber = "832"
+            endingLineNumber = "832"
             landmarkName = "-sendPhoto:"
             landmarkType = "5">
          </BreakpointContent>
@@ -100,28 +100,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "instasend/AppController.mm"
-            timestampString = "417734529.359979"
+            timestampString = "418256311.331374"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "451"
-            endingLineNumber = "451"
+            startingLineNumber = "875"
+            endingLineNumber = "875"
+            landmarkName = "-sendPhoto:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "instasend/AppController.mm"
+            timestampString = "418255362.622413"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "469"
+            endingLineNumber = "469"
             landmarkName = "-setUpPhotoReceiver"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "instasend/AppController.mm"
-            timestampString = "417736240.72693"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "837"
-            endingLineNumber = "837"
-            landmarkName = "-sendPhoto:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

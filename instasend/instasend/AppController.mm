@@ -447,6 +447,7 @@ static  AppController* sharedInstance = nil;
     for(;;)
     {
         int ConnectFD = accept(SocketFD, NULL, NULL);
+        NSMutableData* imageData = [[NSMutableData alloc] init];
         
         if(0 > ConnectFD)
         {
@@ -454,18 +455,29 @@ static  AppController* sharedInstance = nil;
             close(SocketFD);
             exit(EXIT_FAILURE);
         }
-        
-        /* perform read write operations ...
-         read(ConnectFD,buff,size)*/
-        
-        if (-1 == shutdown(ConnectFD, SHUT_RDWR))
+        //Receive total bytes to receive
+        long totalBytesToReceive = 0;
+        long totalBytesReceived  = 0;
+        read(ConnectFD, &totalBytesToReceive, 4);
+        while(totalBytesReceived < totalBytesToReceive)
         {
-            perror("can not shutdown socket");
-            close(ConnectFD);
-            close(SocketFD);
-           
+            uint8_t buffer[4097];
+            int bytesReceived = read(ConnectFD,buffer,4096);
+            
+            [imageData appendBytes:buffer length:bytesReceived];
+            
+            totalBytesReceived += bytesReceived;
+            
+            
         }
+        
+        
         close(ConnectFD);
+        
+        //Save photo to camera roll
+        UIImage* image = [UIImage imageWithData:imageData];
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+        
     }
     
     close(SocketFD);
@@ -820,31 +832,45 @@ static  AppController* sharedInstance = nil;
     long totalBytesToSend = [data length];
     long bytesWritten = 0;
     long totalBytesWritten = 0;
-    uint8_t buffer[1025];
+    uint8_t buffer[4096];
     uint8_t *readBytes = (uint8_t *)[data bytes];
     
-    while(totalBytesWritten < totalBytesToSend)
+    //Send total bytes to send as 4 byte integer
+    bytesWritten = send(SocketFD, &totalBytesToSend, 4, 0);
+    bytesWritten = 0;
+    int numberOfBytesToSend = 4096;
+    
+    while(totalBytesToSend > 0)
     {
-        bzero(buffer, 1024);
+        bzero(buffer, 4097);
         
-        memcpy(buffer,readBytes,1024);
+        memcpy(buffer,readBytes,4096);
         try {
        
-            bytesWritten = send(SocketFD, buffer, 1024, 0);
+            if(totalBytesToSend < 4096)
+                numberOfBytesToSend = totalBytesToSend;
             
-        } catch (NSException* e)
+            bytesWritten = send(SocketFD, buffer, numberOfBytesToSend, 0);
+            totalBytesWritten += bytesWritten;
+            
+            NSLog(@"Bytes written:  %ld", bytesWritten);
+            
+            totalBytesToSend -= bytesWritten;
+            
+            bytesWritten = 0;
+            
+        } catch (...)
         {
             int x = 5;
             
         }
         
-        totalBytesWritten += bytesWritten;
-        
+               
         
     }
     /* perform read write operations ... */
     
-    (void) shutdown(SocketFD, SHUT_RDWR);
+   
     
     close(SocketFD);
     
