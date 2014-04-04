@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		3CE0173518DDE2C800BAAAC8 /* NearbyDevicesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0173418DDE2C800BAAAC8 /* NearbyDevicesTableViewCell.m */; };
 		DE25322218DA1294006A5104 /* NearbyDevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25322118DA1294006A5104 /* NearbyDevicesViewController.m */; };
-		DE25322918DA1427006A5104 /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = DE25322818DA1427006A5104 /* AppController.mm */; };
+		DE25322918DA1427006A5104 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25322818DA1427006A5104 /* AppController.m */; };
 		DE25322D18DA1697006A5104 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = DE25322C18DA1697006A5104 /* Device.m */; };
 		DE3F768118DB51C7004BD60F /* iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DE3F768018DB51C7004BD60F /* iphone.png */; };
 		DE3F768318DB67DC004BD60F /* ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DE3F768218DB67DC004BD60F /* ipad.png */; };
@@ -58,7 +58,7 @@
 		DE25322018DA1294006A5104 /* NearbyDevicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyDevicesViewController.h; sourceTree = "<group>"; };
 		DE25322118DA1294006A5104 /* NearbyDevicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyDevicesViewController.m; sourceTree = "<group>"; };
 		DE25322718DA1427006A5104 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
-		DE25322818DA1427006A5104 /* AppController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppController.mm; sourceTree = "<group>"; };
+		DE25322818DA1427006A5104 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
 		DE25322B18DA1697006A5104 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
 		DE25322C18DA1697006A5104 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
 		DE3F768018DB51C7004BD60F /* iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphone.png; sourceTree = "<group>"; };
@@ -144,7 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				DE25322718DA1427006A5104 /* AppController.h */,
-				DE25322818DA1427006A5104 /* AppController.mm */,
+				DE25322818DA1427006A5104 /* AppController.m */,
 				DEBD8A1218EF0CC600978CC7 /* BluetoothAppController.h */,
 				DEBD8A1318EF0CC600978CC7 /* BluetoothAppController.m */,
 			);
@@ -384,7 +384,7 @@
 				DE87A2D418E33DB600C1A55A /* Activity.m in Sources */,
 				DE87A2D118E33C8200C1A55A /* ActivityTableViewCell.m in Sources */,
 				DE25322D18DA1697006A5104 /* Device.m in Sources */,
-				DE25322918DA1427006A5104 /* AppController.mm in Sources */,
+				DE25322918DA1427006A5104 /* AppController.m in Sources */,
 				DE7936CD18E225EB0003158E /* Payload.m in Sources */,
 				DE87A2CE18E33C6400C1A55A /* ActivityTableViewController.m in Sources */,
 				DEBD8A1418EF0CC600978CC7 /* BluetoothAppController.m in Sources */,

@@ -12,22 +12,6 @@
 
 
 //#include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#include <unistd.h>
-#include <errno.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <netdb.h>
-#include <arpa/inet.h>
-#include <sys/wait.h>
-#include <signal.h>
-#include <ifaddrs.h>
-#include <arpa/inet.h>
 
 
 
@@ -39,14 +23,17 @@
 @interface AppController : NSObject
 {
 
-    dispatch_queue_t listenForAccouncementRequestsQueue;
-    dispatch_queue_t listenForAccouncementResponsesQueue;
-    dispatch_queue_t photoReceiverQueue;
+    CFSocketRef _ipv4socket;
     
     
-    NSTimer* timer;
-    
+       
 }
+
+
+@property (nonatomic, strong, readwrite) NSNetService*     netService;
+@property (nonatomic, strong, readonly ) NSMutableSet*     connections;
+
+
 
 @property (nonatomic, strong) NSMutableArray*  devices;
 @property (nonatomic, strong) NSMutableArray*  activityEntries;
@@ -82,14 +69,8 @@
 -(void)sendPhoto:(UIImage*)photo;
 
 #pragma mark socket methods
--(void)listenForAnnouncementRequests;
--(void)listenForAnnouncementResponses;
-
 -(void)setUpPhotoReceiver;
 
--(IBAction)sendBroadcastForPeers:(id)sender;
-
--(void)sendAnnouncementResponse;
 - (NSString *)getIPAddress;
 
 
