@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "AppController.h"
+#import "BluetoothAppController.h"
 
 @implementation AppDelegate
 
@@ -15,6 +16,7 @@
 {
     
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:124.0/255 green:116.0/255 blue:98.0/255 alpha:1.0]];
+    [BluetoothAppController sharedInstance];
     
     
     

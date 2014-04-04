@@ -16,6 +16,7 @@
 @import ImageIO;
 @import QuartzCore;
 @import MobileCoreServices;
+@import CoreBluetooth;
 
 @interface NearbyDevicesViewController : UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {

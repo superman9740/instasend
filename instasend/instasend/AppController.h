@@ -32,7 +32,6 @@
 
 
 
-
 #define kRefreshDevicesView @"refreshDevicesView"
 #define kRefreshActivityView @"refreshActivityView"
 

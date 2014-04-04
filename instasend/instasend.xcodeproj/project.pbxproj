@@ -21,6 +21,8 @@
 		DE87A2CE18E33C6400C1A55A /* ActivityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE87A2CD18E33C6400C1A55A /* ActivityTableViewController.m */; };
 		DE87A2D118E33C8200C1A55A /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE87A2D018E33C8200C1A55A /* ActivityTableViewCell.m */; };
 		DE87A2D418E33DB600C1A55A /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = DE87A2D318E33DB600C1A55A /* Activity.m */; };
+		DEBD8A1118EF0C6600978CC7 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEBD8A1018EF0C6600978CC7 /* CoreBluetooth.framework */; };
+		DEBD8A1418EF0CC600978CC7 /* BluetoothAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBD8A1318EF0CC600978CC7 /* BluetoothAppController.m */; };
 		DED8EAA0187C84BE00E07C83 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DED8EA9F187C84BE00E07C83 /* Foundation.framework */; };
 		DED8EAA2187C84BE00E07C83 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DED8EAA1187C84BE00E07C83 /* CoreGraphics.framework */; };
 		DED8EAA4187C84BE00E07C83 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DED8EAA3187C84BE00E07C83 /* UIKit.framework */; };
@@ -74,6 +76,9 @@
 		DE87A2D018E33C8200C1A55A /* ActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTableViewCell.m; sourceTree = "<group>"; };
 		DE87A2D218E33DB600C1A55A /* Activity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Activity.h; sourceTree = "<group>"; };
 		DE87A2D318E33DB600C1A55A /* Activity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Activity.m; sourceTree = "<group>"; };
+		DEBD8A1018EF0C6600978CC7 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		DEBD8A1218EF0CC600978CC7 /* BluetoothAppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothAppController.h; sourceTree = "<group>"; };
+		DEBD8A1318EF0CC600978CC7 /* BluetoothAppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothAppController.m; sourceTree = "<group>"; };
 		DED8EA9C187C84BE00E07C83 /* instasend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = instasend.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DED8EA9F187C84BE00E07C83 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DED8EAA1187C84BE00E07C83 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -102,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEBD8A1118EF0C6600978CC7 /* CoreBluetooth.framework in Frameworks */,
 				DED8EAA2187C84BE00E07C83 /* CoreGraphics.framework in Frameworks */,
 				DED8EAA4187C84BE00E07C83 /* UIKit.framework in Frameworks */,
 				DED8EAA0187C84BE00E07C83 /* Foundation.framework in Frameworks */,
@@ -139,6 +145,8 @@
 			children = (
 				DE25322718DA1427006A5104 /* AppController.h */,
 				DE25322818DA1427006A5104 /* AppController.mm */,
+				DEBD8A1218EF0CC600978CC7 /* BluetoothAppController.h */,
+				DEBD8A1318EF0CC600978CC7 /* BluetoothAppController.m */,
 			);
 			name = AppController;
 			sourceTree = "<group>";
@@ -189,6 +197,7 @@
 		DED8EA9E187C84BE00E07C83 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DEBD8A1018EF0C6600978CC7 /* CoreBluetooth.framework */,
 				DED8EA9F187C84BE00E07C83 /* Foundation.framework */,
 				DED8EAA1187C84BE00E07C83 /* CoreGraphics.framework */,
 				DED8EAA3187C84BE00E07C83 /* UIKit.framework */,
@@ -378,6 +387,7 @@
 				DE25322918DA1427006A5104 /* AppController.mm in Sources */,
 				DE7936CD18E225EB0003158E /* Payload.m in Sources */,
 				DE87A2CE18E33C6400C1A55A /* ActivityTableViewController.m in Sources */,
+				DEBD8A1418EF0CC600978CC7 /* BluetoothAppController.m in Sources */,
 				DE25322218DA1294006A5104 /* NearbyDevicesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
